@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessories - LODARK Automotive Systems</title>
+    
+    <!-- 优化的标签栏图标代码 -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" href="/logo.svg" type="image/svg+xml">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#165DFF">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#165DFF">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Accessories page specific styles */
+        h3 {
+            font-size: 24px;
+            margin: 40px 0 20px;
+            color: var(--secondary);
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 10px;
+        }
+        
+        .accessories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .accessory-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .accessory-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .accessory-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background-color: var(--light);
+        }
+        
+        .accessory-icon img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .accessory-icon i {
+            font-size: 48px;
+            color: var(--primary);
+        }
+        
+        .accessory-name {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .accessory-desc {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #0e4fd8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(22, 93, 255, 0.3);
+        }
+        
+        /* 图片弹窗样式 */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        @media (max-width: 992px) {
+            .accessories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .accessories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> > <span>Accessories</span>
+            </div>
+
+            <div class="section-title">
+                <h2>Accessories & Add-ons</h2>
+                <p>Enhance your in-car experience with our high-quality accessories and upgrades</p>
+            </div>
+
+            <h3>Cameras</h3>
+            <div class="accessories-grid">
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/yy.jpg" alt="AHD 170° 720P">
+                    </div>
+                    <h4 class="accessory-name">AHD 170° 720P</h4>
+                    <p class="accessory-desc">Wide-angle reverse camera</p>
+                    <a class="btn learn-more-btn" data-image="images/yy.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/sn.jpg" alt="AHD 170° 1080P">
+                    </div>
+                    <h4 class="accessory-name">AHD 170° 1080P</h4>
+                    <p class="accessory-desc">High-definition wide-angle camera</p>
+                    <a class="btn learn-more-btn" data-image="images/sn.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/sn.jpg" alt="AHD Sony Lens 170° 1080P">
+                    </div>
+                    <h4 class="accessory-name">AHD Sony Lens 170° 1080P</h4>
+                    <p class="accessory-desc">Premium Sony lens camera</p>
+                    <a class="btn learn-more-btn" data-image="images/sn.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/499.jpg" alt="AHD 158° 1080P">
+                    </div>
+                    <h4 class="accessory-name">AHD 158° 1080P</h4>
+                    <p class="accessory-desc">Standard angle high-definition camera</p>
+                    <a class="btn learn-more-btn" data-image="images/499.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/ad.jpg" alt="For AUDI AHD 140° 1080P">
+                    </div>
+                    <h4 class="accessory-name">For AUDI AHD 140° 1080P</h4>
+                    <p class="accessory-desc">Specialty camera for AUDI vehicles</p>
+                    <a class="btn learn-more-btn" data-image="images/ad.jpg">Learn More</a>
+                </div>
+                
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                      <img src="images/36011.jpg" alt="360° Car Camera System">
+                    </div>
+                  <h4 class="accessory-name">360° Car Camera System</h4>
+                    <p class="accessory-desc">360° Panoramic View</p>
+                    <a href="360.html" class="btn">Learn More</a>
+                </div>
+            </div>
+
+            <h3>DVR Systems</h3>
+            <div class="accessories-grid">
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/U3.jpg" alt="U3 (USB)">
+                    </div>
+                    <h4 class="accessory-name">U3 (USB)</h4>
+                    <p class="accessory-desc">USB DVR system</p>
+                    <a class="btn learn-more-btn" data-image="images/U3.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/U6.jpg" alt="U6 (USB)">
+                    </div>
+                    <h4 class="accessory-name">U6 (USB)</h4>
+                    <p class="accessory-desc">Advanced USB DVR system</p>
+                    <a class="btn learn-more-btn" data-image="images/U6.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/U2.jpg" alt="U2 (USB)">
+                    </div>
+                    <h4 class="accessory-name">U2 (USB)</h4>
+                    <p class="accessory-desc">Basic USB DVR system</p>
+                    <a class="btn learn-more-btn" data-image="images/U2.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/U10.jpg" alt="U10 (USB)">
+                    </div>
+                    <h4 class="accessory-name">U10 (USB)</h4>
+                    <p class="accessory-desc">Premium USB DVR system</p>
+                    <a class="btn learn-more-btn" data-image="images/U10.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/Q8pro.jpg" alt="Q8 Pro (WiFi)">
+                    </div>
+                    <h4 class="accessory-name">Q8 Pro (WiFi)</h4>
+                    <p class="accessory-desc">Wireless DVR system with WiFi</p>
+                    <a class="btn learn-more-btn" data-image="images/Q8pro.jpg">Learn More</a>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/U5.jpg" alt="U5 (USB)">
+                    </div>
+                    <h4 class="accessory-name">U5 (USB)</h4>
+                    <p class="accessory-desc">Premium USB DVR system</p>
+                    <a class="btn learn-more-btn" data-image="images/U5.jpg">Learn More</a>
+                </div>
+                
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <img src="images/TF card.jpg" alt="U10 (USB)">
+                    </div>
+                    <h4 class="accessory-name">64GB TF CARD</h4>
+                    <p class="accessory-desc">Storage card for DVR systems</p>
+                    <a class="btn learn-more-btn" data-image="images/TF card.jpg">Learn More</a>
+                </div>
+            </div>
+
+            <h3>Installation Accessories</h3>
+            <div class="accessories-grid">
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h4 class="accessory-name">Power Cables</h4>
+                    <p class="accessory-desc">Compatible with various vehicle models</p>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4 class="accessory-name">CANBUS Adapters</h4>
+                    <p class="accessory-desc">Ensure compatibility with your vehicle's systems</p>
+                </div>
+
+                <div class="accessory-card">
+                    <div class="accessory-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h4 class="accessory-name">Steering Wheel Controls</h4>
+                    <p class="accessory-desc">Retain steering wheel control functionality</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 图片弹窗 -->
+    <div id="imageModal" class="image-modal">
+        <div class="image-modal-content">
+            <button class="close-modal">&times;</button>
+            <img id="modalImage" src="" alt="Product Image">
+        </div>
+    </div>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+    <!-- External JavaScript -->
+    <script src="js/components.js"></script>
+    <script src="js/common.js"></script>
+    
+    <script>
+        // 图片弹窗功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const closeModal = document.querySelector('.close-modal');
+            const learnMoreBtns = document.querySelectorAll('.learn-more-btn');
+            
+            // 点击Learn More按钮打开弹窗
+            learnMoreBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const imageUrl = this.getAttribute('data-image');
+                    modalImage.src = imageUrl;
+                    modalImage.alt = this.closest('.accessory-card').querySelector('.accessory-name').textContent;
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            // 关闭弹窗
+            closeModal.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // 点击弹窗外部关闭
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // ESC键关闭弹窗
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

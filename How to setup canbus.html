@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Install & Setup Canbus / Steering Controls - LODARK Automotive Systems</title>
+    
+    <!-- 优化的标签栏图标代码 -->
+    <!-- 基础图标（必选） -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- 多种尺寸图标适配不同设备 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
+    
+    <!-- Apple设备专用图标 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- 现代浏览器 SVG 支持（可选，更锐利） -->
+    <link rel="icon" href="/logo.svg" type="image/svg+xml">
+    
+    <!-- PWA应用清单 -->
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Windows磁贴配置 -->
+    <meta name="msapplication-TileColor" content="#165DFF">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    
+    <!-- 主题颜色（移动浏览器） -->
+    <meta name="theme-color" content="#165DFF">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #165DFF;
+            --secondary: #363636;
+            --accent: #FF7D00;
+            --light: #F5F7FA;
+            --dark: #1a1a1a;
+            --text: #333333;
+            --text-light: #666666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles - Updated to match index.html */
+        header {
+            background: linear-gradient(135deg, #0e2b5c, #1a56db);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #ff3a29;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 1.5rem;
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            padding: 8px 0;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-menu a {
+            color: var(--text);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .dropdown-menu i {
+            margin-right: 10px;
+            width: 16px;
+            text-align: center;
+        }
+        
+        .dropdown-arrow {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .breadcrumb span {
+            color: var(--text-light);
+        }
+        
+        /* Article Content Styles */
+        .article-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .article-header {
+            margin-bottom: 2rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-meta i {
+            margin-right: 0.5rem;
+        }
+        
+        .article-meta span {
+            margin-right: 1.5rem;
+        }
+        
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.2rem;
+        }
+        
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .article-body h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--secondary);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .article-body h3 {
+            font-size: 1.4rem;
+            margin: 2rem 0 1rem;
+            color: var(--secondary);
+        }
+        
+        .article-body p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-body ul, .article-body ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .article-body li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .step {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .step-title {
+            display: inline-block;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .step-image {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 1.5rem auto;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .step-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .note-box {
+            background-color: #e8f4ff;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background-color: #fff8e6;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .tip-box {
+            background-color: #f0f9f0;
+            border-left: 4px solid #28a745;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .article-footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tag {
+            background-color: var(--light);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .tag:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .share-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--light);
+            color: var(--text);
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .share-button:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Footer - Updated to match index.html */
+        footer {
+            background: #0e2b5c;
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #ff3a29;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+        
+        /* 社交媒体样式 */
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-icon:hover {
+            background: #ff3a29;
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .featured-image {
+                height: 250px;
+            }
+            
+            .step-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Updated Header to match index.html -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">LOD<span>ARK</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="accessories.html" class="nav-link">Accessories</a></li>
+                    <li><a href="oem.html" class="nav-link">OEM/ODM</a></li>
+                    <li class="dropdown">
+                        <a href="Technology Portal.html" class="nav-link">
+                            Technology Portal
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="guzhang.html">
+                                <i class="fas fa-tools"></i>
+                                Faults & Solutions
+                            </a>
+                            <a href="RFQ.html">
+                                <i class="fas fa-question-circle"></i>
+                                FAQ
+                            </a>
+                            <a href="How To's.html" class="active">
+                                <i class="fas fa-book"></i>
+                                How To's
+                            </a>
+                            <a href="3603.html">
+                                <i class="fas fa-camera-retro"></i>
+                                360 Camera Guide
+                            </a>
+                        </div>
+                    </li>
+                    <li><a href="Contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> > <a href="Technology Portal.html">Technology Portal</a> > <a href="How To's.html">How To's</a> > <span>How to Install & Setup Canbus / Steering Controls</span>
+            </div>
+
+            <div class="article-content">
+              <div class="article-header">
+                <h1 class="article-title">How to Install & Setup Canbus / Steering Controls</h1>
+</div>
+                
+                <div class="article-body">
+                    <p>Proper installation of the Canbus adapter is crucial for ensuring your LODARK head unit works seamlessly with your vehicle's steering wheel controls and other integrated systems. This comprehensive guide will walk you through the entire process step by step.</p>
+                    
+                    <h2>What is a Canbus Adapter?</h2>
+                    <p>A Canbus (Controller Area Network Bus) adapter is an interface module that allows your LODARK head unit to communicate with your vehicle's existing electronic systems. It enables features like:</p>
+                    <ul>
+                        <li>Steering wheel control functionality</li>
+                        <li>Vehicle information display (speed, RPM, etc.)</li>
+                        <li>Door open status indicators</li>
+                        <li>Reverse camera activation</li>
+                        <li>Parking sensor integration</li>
+                    </ul>
+                    
+                    <div class="note-box">
+                        <p><strong>Note:</strong> Before starting the installation, ensure you have the correct Canbus adapter for your specific vehicle model. LODARK provides vehicle-specific adapters for most car models.</p>
+                    </div>
+                    
+                    <h2>Installation Steps</h2>
+                    
+                  <div class="step">
+                        <div class="step-title">
+                            <span class="step-number">1</span>
+                            <span class="step-title">Gather Required Tools & Components</span>
+                        </div>
+                        <p>Before beginning, make sure you have all the necessary tools and components:</p>
+                    <ul>
+                            <li>LODARK head unit</li>
+                            <li>Vehicle-specific Canbus adapter</li>
+                            <li>Wire harness connectors</li>
+                            <li>Trim removal tools</li>
+                            <li>Screwdrivers (various sizes)</li>
+                            <li>Wire strippers/crimpers</li>
+                            <li>Electrical tape</li>
+                            <li>Zip ties for cable management</li>
+                      </ul>
+</div>
+                    
+                    <div class="step">
+                        <div class="step-title">
+                            <span class="step-number">2</span>
+                            <span class="step-title">Disconnect the Battery</span>
+                        </div>
+                        <p>For safety, always disconnect the negative terminal of your vehicle's battery before beginning any electrical work. This prevents short circuits and potential damage to your vehicle's electronics.</p>
+                        
+                        <div class="warning-box">
+                            <p><strong>Warning:</strong> Never work on your vehicle's electrical system with the battery connected. This can cause serious damage to both your vehicle and the LODARK head unit.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">
+                            <span class="step-number">3</span>
+                            <span class="step-title">Remove the Factory Head Unit</span>
+                        </div>
+                      <p>Carefully remove the trim panels around your factory head unit using trim removal tools. Once the trim is removed, unscrew and gently pull out the factory head unit.</p>
+<p>Disconnect all cables from the back of the factory unit, taking note of their positions for reference during installation.</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">
+                            <span class="step-number">4</span>
+                            <span class="step-title">Connect the Canbus Adapter</span>
+                        </div>
+                        <p>Connect the Canbus adapter to the LODARK head unit using the provided connectors. The connection is typically made through the dedicated Canbus port on the back of the head unit.</p>
+                        
+                        <div class="step-image">
+                            <div class="placeholder-image">
+                                
+                        <img src="how/canbussz.jpg" alt="canbussz" id="main-img">                            </div>
+                        </div>
+                        
+                        <p>Then, connect the other end of the Canbus adapter to your vehicle's wiring harness. Make sure all connections are secure.</p>
+                        
+                        <div class="tip-box">
+                            <p><strong>Tip:</strong> Most LODARK Canbus adapters are plug-and-play, requiring no additional wiring or modifications. Simply connect the adapter between the head unit and your vehicle's harness.</p>
+                        </div>
+                    </div>
+                    
+                  <div class="step">
+                        <div class="step-title">
+                            <span class="step-number">5</span>
+                            <span class="step-title">Canbus Settings</span>
+                        </div>
+                    <p>Once the physical connections are complete, it's time to program your steering wheel controls:</p>
+                        
+                        <ol>
+                            <li>Reconnect the vehicle battery</li>
+                            <li>Turn on the LODARK head unit</li>
+                            <li>Navigate to Settings &gt; Factory (the passcode is usually 3368 or 1234).</li>
+                            <li>Select "Car Model."</li>
+                            <li>Select the CAN Box type based on the CANbus box.</li>
+                            <li>Select the car make, model, year, and trim level.</li>
+                        </ol>
+</div>
+                    
+                    <div class="step">
+                        <div class="step-title">
+                            <span class="step-number">6</span>
+                            <span class="step-title">Test All Functions</span>
+                        </div>
+                        <p>Before reassembling everything, test all functions to ensure they're working correctly:</p>
+                        <ul>
+                            <li>Test each steering wheel control button</li>
+                            <li>Check if vehicle information is displayed correctly</li>
+                            <li>Test the reverse camera activation (if applicable)</li>
+                            <li>Verify door status indicators work</li>
+                            <li>Ensure all audio functions work properly</li>
+                        </ul>
+                        
+                        <div class="note-box">
+                            <p><strong>Note:</strong> If any functions aren't working correctly, double-check all connections and refer to the troubleshooting section below.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-title">
+                            <span class="step-number">7</span>
+                            <span class="step-title">Reassemble the Dashboard</span>
+                        </div>
+                        <p>Once you've confirmed everything is working properly:</p>
+                        <ol>
+                            <li>Carefully tuck all wires and connectors behind the head unit</li>
+                            <li>Secure the LODARK head unit in place with the provided brackets</li>
+                            <li>Reattach all trim panels</li>
+                            <li>Do a final check of all functions</li>
+                        </ol>
+                    </div>
+                    
+                    <h2>Troubleshooting Common Issues</h2>
+                    
+                    <h3>Steering Wheel Controls Not Working</h3>
+                    <p>If your steering wheel controls aren't functioning:</p>
+                    <ul>
+                        <li>Verify the Canbus adapter is properly connected</li>
+                        <li>Check if you have the correct Canbus adapter for your vehicle</li>
+                        <li>Re-enter the steering wheel control learning process</li>
+                        <li>Try resetting the Canbus adapter by disconnecting and reconnecting power</li>
+                    </ul>
+                    
+                    <h3>No Vehicle Information Display</h3>
+                    <p>If vehicle data isn't appearing on your head unit:</p>
+                    <ul>
+                        <li>Ensure the Canbus adapter is properly connected to both the head unit and vehicle harness</li>
+                        <li>Check if your specific vehicle model supports the information display feature</li>
+                        <li>Verify the Canbus adapter is compatible with your vehicle's model year</li>
+                    </ul>
+                    
+                    <h3>Reverse Camera Not Activating</h3>
+                    <p>If your reverse camera doesn't activate when shifting into reverse:</p>
+                    <ul>
+                        <li>Check the reverse trigger wire connection</li>
+                        <li>Verify the camera itself is functioning</li>
+                        <li>Ensure the camera video cable is properly connected to the head unit</li>
+                    </ul>
+                    
+                    <div class="article-footer">
+                        <div class="tags">
+                            <a href="#" class="tag">Canbus</a>
+                            <a href="#" class="tag">Installation</a>
+                            <a href="#" class="tag">Steering Controls</a>
+                            <a href="#" class="tag">Head Unit</a>
+                            <a href="#" class="tag">LODARK</a>
+                        </div>
+                        
+                        <p>If you encounter any issues during installation, don't hesitate to contact our technical support team for assistance.</p>
+                        
+                        <div class="share-buttons">
+                            <span>Share this guide:</span>
+                            <a href="#" class="share-button"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="share-button"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="share-button"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="share-button"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Updated Footer to match index.html -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>LODARK is a leading manufacturer of automotive navigation systems, committed to providing high-quality products and services to global customers.</p>
+                    <!-- 社交媒体链接 -->
+                    <div class="social-media">
+                        <a href="https://www.youtube.com/@Lodark18" class="social-icon" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61573217336403" class="social-icon" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/lodark_car_player/" class="social-icon" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Product Series</h3>
+                    <ul class="footer-links">
+                        <li><a href="products.html#e-series">E-Series (Entry-Level)</a></li>
+                        <li><a href="products.html#s-series">S-Series (Mid-Range)</a></li>
+                        <li><a href="products.html#p-series">P-Series (Flagship)</a></li>
+                        <li><a href="products.html#specialty">Specialty Series</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="accessories.html">Accessories</a></li>
+                        <li><a href="oem.html">OEM/ODM</a></li>
+                        <li><a href="Technology Portal.html">Technology Portal</a></li>
+                        <li><a href="Contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 LODARK. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const nav = document.querySelector('nav ul');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+                });
+            }
+            
+            // Responsive nav adjustment
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 992) {
+                    document.querySelector('nav ul').style.display = 'flex';
+                } else {
+                    document.querySelector('nav ul').style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

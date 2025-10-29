@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9.7 inch Car Stereo - Product Details</title>
+    
+    <!-- 公共CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/product-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 图标和元数据 -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" href="/logo.svg" type="image/svg+xml">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#165DFF">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#165DFF">
+</head>
+<body>
+    <!-- 导航栏通过JS加载 -->
+    <div id="header-container"></div>
+
+    <div class="product-details-container">
+        <div class="product-header">
+            <h1>9.7 inch Car Stereo</h1>
+            <p class="product-subtitle">Compact design with premium features and performance</p>
+        </div>
+
+        <div class="product-showcase">
+            <!-- 屏幕类型选择区域 -->
+            <div class="screen-types-container">
+                <div class="screen-types-header">
+                    Available Screen Types
+                </div>
+                <div class="screen-types-grid">
+                    <div class="screen-type-card" data-screen-type="9-7-inch-standard">
+                        <img src="images/T9.7.jpg" alt="9.7 inch Standard" class="screen-type-image">
+                        <h3 class="screen-type-name">9.7 inch Standard</h3>
+                        <p class="screen-type-desc">Standard 9.7 inch display</p>
+                        <button class="screen-type-link">View Gallery</button>
+                    </div>
+                    <div class="screen-type-card" data-screen-type="9-7-inch-s3">
+                        <img src="images/T9.7-S3.jpg" alt="9.7 inch S3" class="screen-type-image">
+                        <h3 class="screen-type-name">9.7 inch S3</h3>
+                        <p class="screen-type-desc">S3 model with enhanced features</p>
+                        <button class="screen-type-link">View Gallery</button>
+                    </div>
+                </div>
+            </div>
+</div>
+    </div>
+
+    <!-- 轮播图弹窗 -->
+    <div class="modal-overlay" id="gallery-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Product Gallery</h3>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-carousel">
+                    <div class="modal-main-image-container">
+                        <div class="modal-main-image">
+                            <img src="images/T9.7.jpg" alt="Product Image" id="modal-main-img">
+                        </div>
+                        <div class="modal-image-navigation">
+                            <button class="modal-nav-btn modal-prev-btn">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="modal-nav-btn modal-next-btn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-thumbnail-container" id="modal-thumbnails">
+                        <!-- 缩略图将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 网站底栏通过JS加载 -->
+    <div id="footer-container"></div>
+
+    <!-- 公共JS -->
+    <script src="js/components.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/product-details.js"></script>
+    
+    <script>
+        // 9.7 inch产品特定的图片集
+        window.productImageSets = {
+            '9-7-inch-standard': [
+                'images/T9.7.jpg'
+            ],
+            '9-7-inch-s3': [
+                'images/T9.7-S3.jpg'
+            ]
+        };
+    </script>
+</body>
+</html>
